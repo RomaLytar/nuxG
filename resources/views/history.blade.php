@@ -18,9 +18,9 @@
                         <ul class="list-group">
                             @foreach ($history as $item)
                                 <li class="list-group-item">
-                                    <strong>Number:</strong> {{ $item['number'] }},
-                                    <strong>Result:</strong> {{ $item['result'] }},
-                                    <strong>Win:</strong> {{ $item['win_amount'] }}
+                                    <strong>Number:</strong> {{ $item->random_number }},
+                                    <strong>Result:</strong> {{ $item->result }},
+                                    <strong>Win:</strong> {{ $item->win_amount }}
                                 </li>
                             @endforeach
                         </ul>

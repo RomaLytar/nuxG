@@ -51,7 +51,7 @@ class UserService
             return ['error' => 'The link is invalid or expired.'];
         }
 
-        $randomNumber = rand(1, 1000);
+        $randomNumber = $this->generateRandomNumber();
         $isWin = $randomNumber % 2 === 0 ? self::WIN : self::LOSE;
         $winAmount = 0;
 
@@ -68,6 +68,10 @@ class UserService
         ModelSaver::save(new GameHistory(), $data);
 
         return $data;
+    }
+    private function generateRandomNumber(): int
+    {
+        return rand(1, 1000);
     }
 
     /**
