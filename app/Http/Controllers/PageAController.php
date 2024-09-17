@@ -17,7 +17,8 @@ class PageAController extends Controller
     public function show(string $unique_link)
     {
         $user = $this->userService->getUserByUniqueLink($unique_link);
-
+        //@TODO создать и ексепшин который
+        // будет возвращать ошибку и вызывать его внутри сервиса
         if (!$user) {
             return redirect('/')->with('error', 'The link is invalid or expired.');
         }
@@ -28,7 +29,6 @@ class PageAController extends Controller
     public function generateNewLink(string $unique_link)
     {
         $newLink = $this->userService->generateNewLink($unique_link);
-
         if ($newLink) {
             return redirect()->route('pageA', ['unique_link' => $newLink]);
         }
@@ -45,6 +45,7 @@ class PageAController extends Controller
     {
         $result = $this->userService->playLuckyGame($unique_link);
 
+        //@TODO атк же в ексепшн
         if (isset($result['error'])) {
             return redirect('/')->with('error', $result['error']);
         }
@@ -59,11 +60,12 @@ class PageAController extends Controller
     public function history($unique_link)
     {
         $user = $this->userService->getUserByUniqueLink($unique_link);
-
+        //@TODO експешн
         if (!$user) {
             return redirect('/')->with('error', 'The link is invalid or expired.');
         }
 
+        //@TODO можно так же вынести в сервис как и поиск юзера по линке
         // History game user, last GameHistory::COUNT_HISTORY
         $history = GameHistory::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')

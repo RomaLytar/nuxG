@@ -16,6 +16,7 @@ use App\Http\Controllers\PageAController;
 */
 
 Route::get('/', [RegistrationController::class, 'showForm'])->name('home');
+//@TODO можно добавить мидлвару что только авторизированые пользователи могут попасть на данные страницы
 Route::post('/register', [RegistrationController::class, 'register'])->name('register');
 Route::group(['prefix' => '/pageA/{unique_link}'], function () {
     Route::get('/', [PageAController::class, 'show'])->name('pageA');
